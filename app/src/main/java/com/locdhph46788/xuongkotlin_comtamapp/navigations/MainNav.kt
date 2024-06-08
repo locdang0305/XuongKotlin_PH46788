@@ -25,7 +25,7 @@ fun AppNavHost() {
         composable(ROUTE_MAIN_NAV.WELCOME.name) { WelcomeScreen(navController) }
         composable(ROUTE_MAIN_NAV.LOGIN.name) { LoginScreen(navController) }
         composable(ROUTE_MAIN_NAV.SIGNUP.name) { SignupScreen(navController) }
-//        composable(ROUTE_MAIN_NAV.HOME.name) { HomeScreen(navController) }
+        composable(ROUTE_MAIN_NAV.HOME.name) { BottomNavHost(navController) }
 
 
     }

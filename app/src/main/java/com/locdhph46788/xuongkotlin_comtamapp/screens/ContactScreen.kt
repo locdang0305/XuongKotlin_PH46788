@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun ContactScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -22,7 +22,7 @@ fun HomeScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "HomeScreen",
+            text = "ContactScreen",
             color = Color.White,
             modifier = Modifier.selectable(
                 selected = true,

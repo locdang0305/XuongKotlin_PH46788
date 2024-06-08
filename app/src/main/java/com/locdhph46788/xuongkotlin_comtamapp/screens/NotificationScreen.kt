@@ -1,5 +1,6 @@
 package com.locdhph46788.xuongkotlin_comtamapp.screens
 
+import android.app.Notification
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun NotificationScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -22,7 +23,7 @@ fun HomeScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "HomeScreen",
+            text = "NotificationScreen",
             color = Color.White,
             modifier = Modifier.selectable(
                 selected = true,

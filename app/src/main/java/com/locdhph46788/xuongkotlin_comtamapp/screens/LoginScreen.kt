@@ -69,6 +69,8 @@ fun LoginScreen(navController: NavController) {
 
             Button(
                 onClick = {
+                    navController.navigate(ROUTE_MAIN_NAV.HOME.name)
+
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFFF5722)
