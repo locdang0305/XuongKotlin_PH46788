@@ -11,9 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 import com.locdhph46788.xuongkotlin_comtamapp.navigations.AppNavHost
 import com.locdhph46788.xuongkotlin_comtamapp.ui.theme.XuongKotlin_ComTamAppTheme
+import com.locdhph46788.xuongkotlin_comtamapp.viewmodels.AuthViewModel
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -23,7 +25,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             XuongKotlin_ComTamAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavHost()
+                    val viewModel: AuthViewModel = viewModel()
+                    AppNavHost(viewModel)
                 }
             }
         }

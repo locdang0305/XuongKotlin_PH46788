@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "808059995902",
+    "project_id": "xuongkotlin-comtamapp",
+    "storage_bucket": "xuongkotlin-comtamapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808059995902:android:cdc3f689a1b36b26f6c7af",
+        "android_client_info": {
+          "package_name": "com.locdhph46788.xuongkotlin_comtamapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLYpKJOmaN0LdfmSPlj447IUAHOY37nFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

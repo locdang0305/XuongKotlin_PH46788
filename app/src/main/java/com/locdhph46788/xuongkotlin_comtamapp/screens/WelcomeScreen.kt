@@ -29,7 +29,7 @@ fun WelcomeScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.9f)),
+            .background(Color(0xff252121)),
         contentAlignment = Alignment.Center
     ) {
         Image(

@@ -1,5 +1,7 @@
 package com.locdhph46788.xuongkotlin_comtamapp.screens
 
+import android.util.Patterns
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,19 +13,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -31,10 +30,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.locdhph46788.xuongkotlin_comtamapp.R
 import com.locdhph46788.xuongkotlin_comtamapp.navigations.ROUTE_MAIN_NAV
+import com.locdhph46788.xuongkotlin_comtamapp.viewmodels.AuthViewModel
 
 @Composable
-fun SignupScreen(navController: NavController) {
-    val username = remember { mutableStateOf("") }
+fun SignupScreen(navController: NavController, viewModel: AuthViewModel) {
+    val context = LocalContext.current
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val repassword = remember { mutableStateOf("") }
@@ -42,7 +42,7 @@ fun SignupScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1F1B1E)), // Màu nền
+            .background(Color(0xff252121)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -67,12 +67,6 @@ fun SignupScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
             CustomTextField(
-                label = "Tài khoản",
-                value = username.value,
-                onValueChange = { username.value = it }
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            CustomTextField(
                 label = "Email",
                 value = email.value,
                 onValueChange = { email.value = it }
@@ -92,6 +86,32 @@ fun SignupScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
             Button(
                 onClick = {
+                    if (email.value.isEmpty() || !isValidEmail(email.value)) {
+                        Toast.makeText(
+                            context,
+                            "Vui lòng nhập email đúng định dạng!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (password.value.isEmpty() || password.value.length < 6) {
+                        Toast.makeText(
+                            context,
+                            "Vui lòng nhập mật khẩu có tối thiểu 6 kí tự!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    } else if (repassword.value.isEmpty() || repassword.value.length < 6) {
+                        Toast.makeText(
+                            context,
+                            "Vui lòng nhập lại mật khẩu có tối thiểu 6 kí tự!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    } else if (!repassword.value.equals(password.value)) {
+                        Toast.makeText(context, "Mật khẩu không trùng khớp!", Toast.LENGTH_SHORT)
+                            .show()
+                    } else {
+                        viewModel.signup(email.value, password.value, context, navController)
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFFF5722)
@@ -106,7 +126,6 @@ fun SignupScreen(navController: NavController) {
             Button(
                 onClick = {
                     navController.navigate(ROUTE_MAIN_NAV.LOGIN.name)
-
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF4CAF50)
@@ -119,5 +138,9 @@ fun SignupScreen(navController: NavController) {
             }
         }
     }
+}
+
+fun isValidEmail(email: String): Boolean {
+    return Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
 

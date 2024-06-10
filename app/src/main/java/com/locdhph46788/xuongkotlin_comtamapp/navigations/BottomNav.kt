@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -34,17 +32,32 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.locdhph46788.xuongkotlin_comtamapp.R
+import com.locdhph46788.xuongkotlin_comtamapp.screens.AddDishScreen
+import com.locdhph46788.xuongkotlin_comtamapp.screens.AddTypeDishScreen
 import com.locdhph46788.xuongkotlin_comtamapp.screens.ContactScreen
+import com.locdhph46788.xuongkotlin_comtamapp.screens.DeleteUpdateDishScreen
+import com.locdhph46788.xuongkotlin_comtamapp.screens.DeleteUpdateTypeDishScreen
 import com.locdhph46788.xuongkotlin_comtamapp.screens.HomeScreen
+import com.locdhph46788.xuongkotlin_comtamapp.screens.ManageDishScreen
 import com.locdhph46788.xuongkotlin_comtamapp.screens.ManageScreen
+import com.locdhph46788.xuongkotlin_comtamapp.screens.ManageTypeDishScreen
 import com.locdhph46788.xuongkotlin_comtamapp.screens.NotificationScreen
+import com.locdhph46788.xuongkotlin_comtamapp.screens.OrderDetailScreen
 
 
 enum class ROUTE_BOTTOM_NAV {
     HOME,
     MANAGE,
     CONTACT,
-    NOTIFICATION
+    NOTIFICATION,
+    ORDERDETAIL,
+    MANAGEDISH,
+    MANAGETYPEDISH,
+    ADDDISH,
+    ADDTYPEDISH,
+    DELETEUPDATEDISH,
+    DELETEUPDATETYPEDISH
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -138,7 +151,7 @@ fun BottomNavHost(navController: NavHostController) {
                     selected = isSelected === ROUTE_BOTTOM_NAV.MANAGE.name,
                     onClick = {
                         isSelected = ROUTE_BOTTOM_NAV.MANAGE.name
-                        navController.navigate(ROUTE_BOTTOM_NAV.HOME.name) {
+                        navController.navigate(ROUTE_BOTTOM_NAV.MANAGE.name) {
                             popUpTo(0)
                         }
                     },
@@ -213,8 +226,29 @@ fun BottomNavHost(navController: NavHostController) {
                 composable(ROUTE_BOTTOM_NAV.MANAGE.name) { ManageScreen(navController) }
                 composable(ROUTE_BOTTOM_NAV.CONTACT.name) { ContactScreen(navController) }
                 composable(ROUTE_BOTTOM_NAV.NOTIFICATION.name) { NotificationScreen(navController) }
+                composable(ROUTE_BOTTOM_NAV.ORDERDETAIL.name) { OrderDetailScreen(navController) }
+                composable(ROUTE_BOTTOM_NAV.MANAGEDISH.name) { ManageDishScreen(navController) }
+                composable(ROUTE_BOTTOM_NAV.MANAGETYPEDISH.name) {
+                    ManageTypeDishScreen(
+                        navController
+                    )
+                }
+                composable(ROUTE_BOTTOM_NAV.ADDDISH.name) { AddDishScreen(navController) }
+                composable(ROUTE_BOTTOM_NAV.ADDTYPEDISH.name) { AddTypeDishScreen(navController) }
+                composable(ROUTE_BOTTOM_NAV.DELETEUPDATEDISH.name) {
+                    DeleteUpdateDishScreen(
+                        navController
+                    )
+                }
+                composable(ROUTE_BOTTOM_NAV.DELETEUPDATETYPEDISH.name) {
+                    DeleteUpdateTypeDishScreen(
+                        navController
+                    )
+                }
+
 
             }
+
 
         }
     }

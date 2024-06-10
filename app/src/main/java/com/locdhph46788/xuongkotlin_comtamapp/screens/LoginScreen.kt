@@ -1,5 +1,6 @@
 package com.locdhph46788.xuongkotlin_comtamapp.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -18,16 +20,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.locdhph46788.xuongkotlin_comtamapp.R
 import com.locdhph46788.xuongkotlin_comtamapp.navigations.ROUTE_MAIN_NAV
+import com.locdhph46788.xuongkotlin_comtamapp.viewmodels.AuthViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
-    val username = remember { mutableStateOf("") }
+fun LoginScreen(navController: NavController, viewModel: AuthViewModel) {
+    val context = LocalContext.current
+    val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1F1B1E)), // Màu nền
+            .background(Color(0xff252121)),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -52,9 +56,9 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(32.dp))
             CustomTextField(
-                label = "Tài khoản",
-                value = username.value,
-                onValueChange = { username.value = it }
+                label = "Email",
+                value = email.value,
+                onValueChange = { email.value = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -69,8 +73,22 @@ fun LoginScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    navController.navigate(ROUTE_MAIN_NAV.HOME.name)
-
+                    if (email.value.isEmpty() || !isValidEmail(email.value)) {
+                        Toast.makeText(
+                            context,
+                            "Vui lòng nhập email đúng định dạng!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (password.value.isEmpty() || password.value.length < 6) {
+                        Toast.makeText(
+                            context,
+                            "Vui lòng nhập mật khẩu có tối thiểu 6 kí tự!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    } else {
+                        viewModel.login(email.value, password.value, context, navController)
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFFF5722)
@@ -81,6 +99,7 @@ fun LoginScreen(navController: NavController) {
             ) {
                 Text(text = "Đăng nhập", color = Color.White)
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
                     navController.navigate(ROUTE_MAIN_NAV.SIGNUP.name)

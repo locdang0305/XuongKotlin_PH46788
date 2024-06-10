@@ -2,17 +2,14 @@ package com.locdhph46788.xuongkotlin_comtamapp.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -29,8 +26,7 @@ import com.locdhph46788.xuongkotlin_comtamapp.R
 import com.locdhph46788.xuongkotlin_comtamapp.navigations.ROUTE_BOTTOM_NAV
 
 @Composable
-
-fun ManageScreen(navController: NavController) {
+fun ManageDishScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +34,7 @@ fun ManageScreen(navController: NavController) {
     ) {
         Button(
             onClick = {
-                navController.navigate(ROUTE_BOTTOM_NAV.MANAGETYPEDISH.name)
+                navController.navigate(ROUTE_BOTTOM_NAV.ADDDISH.name)
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF252121)
@@ -57,7 +53,7 @@ fun ManageScreen(navController: NavController) {
                 Spacer(modifier = Modifier.width(5.dp))
 
                 Text(
-                    text = "Quản lý loại món ăn",
+                    text = "Thêm món ăn",
                     fontSize = 17.sp,
                     fontWeight = FontWeight(700),
                     color = Color.White
@@ -69,7 +65,7 @@ fun ManageScreen(navController: NavController) {
 
         Button(
             onClick = {
-                navController.navigate(ROUTE_BOTTOM_NAV.MANAGEDISH.name)
+                navController.navigate(ROUTE_BOTTOM_NAV.DELETEUPDATEDISH.name)
             },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF252121)
@@ -88,7 +84,7 @@ fun ManageScreen(navController: NavController) {
                 Spacer(modifier = Modifier.width(5.dp))
 
                 Text(
-                    text = "Quản lý món ăn",
+                    text = "Sửa/Xóa món ăn",
                     fontSize = 17.sp,
                     fontWeight = FontWeight(700),
                     color = Color.White
